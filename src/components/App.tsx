@@ -1,5 +1,6 @@
 import React from 'react'
 import { headerClass, mainClass } from './App.css'
+import { AutoFetcher } from './AutoFetcher'
 import { Prefectures } from './Prefectures'
 
 function App() {
@@ -9,6 +10,7 @@ function App() {
       <main className={mainClass}>
         <Prefectures />
       </main>
+      <AutoFetcher />
     </div>
   )
 }

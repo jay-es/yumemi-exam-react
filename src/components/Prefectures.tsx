@@ -1,4 +1,4 @@
-import React, { useCallback } from 'react'
+import React from 'react'
 import { usePrefectureList } from '../hooks/api'
 import {
   togglePrefectureCode,
@@ -9,24 +9,29 @@ import { labelClass, liClass, ulClass } from './Prefectures.css'
 
 type CheckboxProps = {
   pref: Prefecture
+  checked: boolean
 }
-const Checkbox: React.FC<CheckboxProps> = ({ pref }) => {
-  const prefectureCodes = usePrefectureCodes()
+const Checkbox = React.memo(function Checkbox({
+  pref,
+  checked,
+}: CheckboxProps) {
   const toggle = togglePrefectureCode()
-
-  const checked = prefectureCodes.includes(pref.prefCode)
-  const handleChange = useCallback(() => toggle(pref.prefCode), [checked])
 
   return (
     <label className={labelClass}>
-      <input type="checkbox" checked={checked} onChange={handleChange} />
+      <input
+        type="checkbox"
+        checked={checked}
+        onChange={() => toggle(pref.prefCode)}
+      />
       {pref.prefName}
     </label>
   )
-}
+})
 
-export const Prefectures = () => {
+export const Prefectures = React.memo(function Prefectures() {
   const { isLoading, error, data } = usePrefectureList()
+  const prefectureCodes = usePrefectureCodes()
 
   if (isLoading) {
     return <p>Loading...</p>
@@ -40,9 +45,12 @@ export const Prefectures = () => {
     <ul className={ulClass}>
       {data?.map((pref) => (
         <li key={pref.prefCode} className={liClass}>
-          <Checkbox pref={pref} />
+          <Checkbox
+            pref={pref}
+            checked={prefectureCodes.includes(pref.prefCode)}
+          />
         </li>
       ))}
     </ul>
   )
-}
+})

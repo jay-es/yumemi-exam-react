@@ -1,3 +1,4 @@
+import { useCallback } from 'react'
 import { atom, useRecoilValue, useSetRecoilState } from 'recoil'
 
 const prefectureCodesState = atom<number[]>({
@@ -8,14 +9,13 @@ const prefectureCodesState = atom<number[]>({
 export const usePrefectureCodes = () => useRecoilValue(prefectureCodesState)
 
 export const togglePrefectureCode = () => {
-  const prefectureCodes = usePrefectureCodes()
   const setState = useSetRecoilState(prefectureCodesState)
 
-  return (prefCode: number) => {
-    if (prefectureCodes.includes(prefCode)) {
-      setState(prefectureCodes.filter((v) => v !== prefCode))
-    } else {
-      setState([...prefectureCodes, prefCode].sort())
-    }
-  }
+  return useCallback((prefCode: number) => {
+    setState((currVal) =>
+      currVal.includes(prefCode)
+        ? currVal.filter((v) => v !== prefCode)
+        : [...currVal, prefCode].sort()
+    )
+  }, [])
 }

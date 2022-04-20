@@ -15,7 +15,7 @@ export const togglePrefectureCode = () => {
     setState((currVal) =>
       currVal.includes(prefCode)
         ? currVal.filter((v) => v !== prefCode)
-        : [...currVal, prefCode].sort()
+        : [...currVal, prefCode].sort((a, b) => a - b)
     )
   }, [])
 }

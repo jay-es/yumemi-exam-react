@@ -51,6 +51,11 @@ export const Prefectures = React.memo(function Prefectures() {
           />
         </li>
       ))}
+
+      {/* 最後の行が崩れないように空の li を並べる */}
+      {data?.map((pref) => (
+        <li key={pref.prefCode} className={liClass}></li>
+      ))}
     </ul>
   )
 })

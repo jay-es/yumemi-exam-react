@@ -11,3 +11,7 @@ export const liClass = style({
   marginRight: 8,
   marginBottom: 8,
 })
+
+export const labelClass = style({
+  userSelect: 'none',
+})

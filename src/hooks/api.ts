@@ -1,12 +1,8 @@
 import { useQuery } from 'react-query'
+import { Prefecture } from '../types'
 
 const headers = {
   'X-API-KEY': import.meta.env.VITE_API_KEY,
-}
-
-type Prefecture = {
-  prefCode: number
-  prefName: string
 }
 
 export const usePrefectureList = () =>

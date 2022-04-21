@@ -1,6 +1,6 @@
 import { useCallback } from 'react'
 import { atom, useRecoilValue, useSetRecoilState } from 'recoil'
-import { Prefecture, YearValue } from '../types'
+import { Prefecture, YearValue } from '~/types'
 
 type Population = Record<
   number,

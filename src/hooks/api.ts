@@ -1,7 +1,7 @@
 import { useEffect } from 'react'
 import { useQuery } from 'react-query'
-import { usePopulation, useSetPopulation } from '../states/population'
-import { Prefecture, YearValue } from '../types'
+import { usePopulation, useSetPopulation } from '~/states/population'
+import { Prefecture, YearValue } from '~/types'
 
 const headers = {
   'X-API-KEY': import.meta.env.VITE_API_KEY,

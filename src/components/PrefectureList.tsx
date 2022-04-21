@@ -1,7 +1,7 @@
 import React from 'react'
-import { useFetchPopulation, usePrefectures } from '../hooks/api'
-import { togglePrefCode, usePrefCodes } from '../states/prefCodes'
-import { Prefecture } from '../types'
+import { useFetchPopulation, usePrefectures } from '~/hooks/api'
+import { togglePrefCode, usePrefCodes } from '~/states/prefCodes'
+import { Prefecture } from '~/types'
 import { labelClass, liClass, ulClass } from './PrefectureList.css'
 
 type CheckboxProps = {

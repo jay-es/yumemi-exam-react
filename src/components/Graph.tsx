@@ -11,8 +11,8 @@ import {
 import React, { useMemo } from 'react'
 import { Line } from 'react-chartjs-2'
 
-import { usePopulation } from '../states/population'
-import { usePrefCodes } from '../states/prefCodes'
+import { usePopulation } from '~/states/population'
+import { usePrefCodes } from '~/states/prefCodes'
 
 ChartJS.register(
   CategoryScale,

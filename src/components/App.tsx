@@ -1,9 +1,9 @@
 import React from 'react'
 import { headerClass, mainClass } from './App.css'
-import { Graph } from './Graph'
-import { PrefectureList } from './PrefectureList'
+import { Graph } from '~/components/Graph'
+import { PrefectureList } from '~/components/PrefectureList'
 
-function App() {
+export function App() {
   return (
     <div>
       <header className={headerClass}>都道府県別 総人口推移</header>
@@ -14,5 +14,3 @@ function App() {
     </div>
   )
 }
-
-export default App

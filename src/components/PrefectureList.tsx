@@ -1,11 +1,11 @@
 import React from 'react'
-import { useFetchPopulation, usePrefectureList } from '../hooks/api'
+import { useFetchPopulation, usePrefectures } from '../hooks/api'
 import {
   togglePrefectureCode,
   usePrefectureCodes,
 } from '../states/prefectureCodes'
 import { Prefecture } from '../types'
-import { labelClass, liClass, ulClass } from './Prefectures.css'
+import { labelClass, liClass, ulClass } from './PrefectureList.css'
 
 type CheckboxProps = {
   pref: Prefecture
@@ -29,8 +29,8 @@ const Checkbox = React.memo(function Checkbox({
   )
 })
 
-export const Prefectures = React.memo(function Prefectures() {
-  const { isLoading, error, data } = usePrefectureList()
+export const PrefectureList = React.memo(function PrefectureList() {
+  const { isLoading, error, data } = usePrefectures()
   const prefectureCodes = usePrefectureCodes()
 
   useFetchPopulation(prefectureCodes, data)

@@ -7,7 +7,7 @@ const headers = {
   'X-API-KEY': import.meta.env.VITE_API_KEY,
 }
 
-export const usePrefectureList = () =>
+export const usePrefectures = () =>
   useQuery<Prefecture[], Error>('prefectures', () =>
     fetch('https://opendata.resas-portal.go.jp/api/v1/prefectures', {
       headers,
@@ -28,16 +28,16 @@ const fetchPopulation = (prefCode: number): Promise<YearValue[]> =>
 /** チェックボックスが変更されたら、その都道府県の人口を取得する */
 export const useFetchPopulation = (
   prefectureCodes: number[],
-  prefectureList: Prefecture[] | undefined
+  prefectures: Prefecture[] | undefined
 ) => {
   const population = usePopulations()
   const setPopulation = useSetPopulation()
 
   useEffect(() => {
     prefectureCodes.forEach(async (prefCode) => {
-      if (population[prefCode] || !prefectureList) return
+      if (population[prefCode] || !prefectures) return
 
-      const pref = prefectureList.find((p) => p.prefCode === prefCode)
+      const pref = prefectures.find((p) => p.prefCode === prefCode)
       if (!pref) {
         throw new Error(`prefCode ${prefCode} not found`)
       }
@@ -45,5 +45,5 @@ export const useFetchPopulation = (
       const data = await fetchPopulation(prefCode)
       setPopulation(pref, data)
     })
-  }, [prefectureCodes, prefectureList])
+  }, [prefectureCodes, prefectures])
 }

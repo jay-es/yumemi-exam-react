@@ -11,8 +11,8 @@ import {
 import React, { useMemo } from 'react'
 import { Line } from 'react-chartjs-2'
 
-import { usePopulations } from '../states/population'
-import { usePrefectureCodes } from '../states/prefectureCodes'
+import { usePopulation } from '../states/population'
+import { usePrefCodes } from '../states/prefCodes'
 
 ChartJS.register(
   CategoryScale,
@@ -28,11 +28,11 @@ ChartJS.register(
 const PREF_RATIO = (360 / 47) * 2
 
 export const Graph = React.memo(function Graph() {
-  const prefectureCodes = usePrefectureCodes()
-  const population = usePopulations()
+  const prefCodes = usePrefCodes()
+  const population = usePopulation()
 
   const data = useMemo(() => {
-    const values = prefectureCodes.map((p) => population[p]).filter(Boolean)
+    const values = prefCodes.map((p) => population[p]).filter(Boolean)
     const labels = values[0]?.data.map((p) => p.year)
     const datasets = values.map((p) => ({
       label: p.prefName,
@@ -42,7 +42,7 @@ export const Graph = React.memo(function Graph() {
     }))
 
     return { labels, datasets }
-  }, [prefectureCodes, population])
+  }, [prefCodes, population])
 
   return <Line data={data} />
 })

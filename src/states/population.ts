@@ -16,7 +16,7 @@ const populationState = atom<Population>({
   default: Object.create(null),
 })
 
-export const usePopulations = () => useRecoilValue(populationState)
+export const usePopulation = () => useRecoilValue(populationState)
 
 export const useSetPopulation = () => {
   const setState = useSetRecoilState(populationState)

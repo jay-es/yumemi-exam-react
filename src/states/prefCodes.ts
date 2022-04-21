@@ -1,15 +1,15 @@
 import { useCallback } from 'react'
 import { atom, useRecoilValue, useSetRecoilState } from 'recoil'
 
-const prefectureCodesState = atom<number[]>({
-  key: 'prefectureCodes',
+const prefCodesState = atom<number[]>({
+  key: 'prefCodes',
   default: [13, 23, 27],
 })
 
-export const usePrefectureCodes = () => useRecoilValue(prefectureCodesState)
+export const usePrefCodes = () => useRecoilValue(prefCodesState)
 
-export const togglePrefectureCode = () => {
-  const setState = useSetRecoilState(prefectureCodesState)
+export const togglePrefCode = () => {
+  const setState = useSetRecoilState(prefCodesState)
 
   return useCallback((prefCode: number) => {
     setState((currVal) =>

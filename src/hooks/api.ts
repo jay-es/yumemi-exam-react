@@ -1,6 +1,6 @@
 import { useEffect } from 'react'
 import { useQuery } from 'react-query'
-import { usePopulations, useSetPopulation } from '../states/population'
+import { usePopulation, useSetPopulation } from '../states/population'
 import { Prefecture, YearValue } from '../types'
 
 const headers = {
@@ -27,14 +27,14 @@ const fetchPopulation = (prefCode: number): Promise<YearValue[]> =>
 
 /** チェックボックスが変更されたら、その都道府県の人口を取得する */
 export const useFetchPopulation = (
-  prefectureCodes: number[],
+  prefCodes: number[],
   prefectures: Prefecture[] | undefined
 ) => {
-  const population = usePopulations()
+  const population = usePopulation()
   const setPopulation = useSetPopulation()
 
   useEffect(() => {
-    prefectureCodes.forEach(async (prefCode) => {
+    prefCodes.forEach(async (prefCode) => {
       if (population[prefCode] || !prefectures) return
 
       const pref = prefectures.find((p) => p.prefCode === prefCode)
@@ -45,5 +45,5 @@ export const useFetchPopulation = (
       const data = await fetchPopulation(prefCode)
       setPopulation(pref, data)
     })
-  }, [prefectureCodes, prefectures])
+  }, [prefCodes, prefectures])
 }

@@ -1,6 +1,5 @@
 import React from 'react'
 import { headerClass, mainClass } from './App.css'
-import { AutoFetcher } from './AutoFetcher'
 import { Graph } from './Graph'
 import { Prefectures } from './Prefectures'
 
@@ -12,7 +11,6 @@ function App() {
         <Prefectures />
         <Graph />
       </main>
-      <AutoFetcher />
     </div>
   )
 }

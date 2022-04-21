@@ -1,5 +1,5 @@
 import React from 'react'
-import { usePrefectureList } from '../hooks/api'
+import { useFetchPopulation, usePrefectureList } from '../hooks/api'
 import {
   togglePrefectureCode,
   usePrefectureCodes,
@@ -32,6 +32,8 @@ const Checkbox = React.memo(function Checkbox({
 export const Prefectures = React.memo(function Prefectures() {
   const { isLoading, error, data } = usePrefectureList()
   const prefectureCodes = usePrefectureCodes()
+
+  useFetchPopulation(prefectureCodes, data)
 
   if (isLoading) {
     return <p>Loading...</p>

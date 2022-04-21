@@ -5,6 +5,7 @@ import { Prefecture, YearValue } from '../types'
 type Population = Record<
   number,
   {
+    prefCode: number
     prefName: string
     data: YearValue[]
   }
@@ -24,6 +25,7 @@ export const useSetPopulation = () => {
     setState((currVal) => ({
       ...currVal,
       [pref.prefCode]: {
+        prefCode: pref.prefCode,
         prefName: pref.prefName,
         data,
       },

@@ -3,7 +3,7 @@ import { atom, useRecoilValue, useSetRecoilState } from 'recoil'
 
 const prefectureCodesState = atom<number[]>({
   key: 'prefectureCodes',
-  default: [13],
+  default: [13, 23, 27],
 })
 
 export const usePrefectureCodes = () => useRecoilValue(prefectureCodesState)

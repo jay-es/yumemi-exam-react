@@ -1,0 +1,1 @@
+export { PrefectureList } from './PrefectureList'

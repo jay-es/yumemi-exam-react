@@ -1,6 +1,6 @@
 import React from 'react'
 import { headerClass, mainClass } from './App.css'
-import { Graph } from '~/components/Graph'
+import { Graph } from '~/components/Graph/Graph'
 import { PrefectureList } from '~/components/PrefectureList'
 
 export function App() {

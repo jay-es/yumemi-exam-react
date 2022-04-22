@@ -3,7 +3,7 @@ import { headerClass, mainClass } from './App.css'
 import { Graph } from '~/components/Graph/Graph'
 import { PrefectureList } from '~/components/PrefectureList'
 
-export function App() {
+export const App = React.memo(function App() {
   return (
     <div>
       <header className={headerClass}>都道府県別 総人口推移</header>
@@ -13,4 +13,4 @@ export function App() {
       </main>
     </div>
   )
-}
+})

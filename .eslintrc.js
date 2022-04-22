@@ -17,6 +17,9 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  plugins: ['react', '@typescript-eslint'],
-  rules: {},
+  plugins: ['react', 'react-memo', '@typescript-eslint'],
+  rules: {
+    'react-memo/require-memo': 'error',
+    'react-memo/require-usememo': 'error',
+  },
 }

@@ -13,6 +13,7 @@ import { Line } from 'react-chartjs-2'
 
 import { usePopulation } from '~/states/population'
 import { usePrefCodes } from '~/states/prefCodes'
+import { isNonNullable } from '~/utils/isNonNullable'
 
 ChartJS.register(
   CategoryScale,
@@ -32,7 +33,7 @@ export const Graph = React.memo(function Graph() {
   const population = usePopulation()
 
   const data = useMemo(() => {
-    const values = prefCodes.map((p) => population[p]).filter(Boolean)
+    const values = prefCodes.map((p) => population[p]).filter(isNonNullable)
     const labels = values[0]?.data.map((p) => p.year)
     const datasets = values.map((p) => ({
       label: p.prefName,

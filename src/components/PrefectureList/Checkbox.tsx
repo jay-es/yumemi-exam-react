@@ -1,5 +1,6 @@
-import React from 'react'
-import { useFetchPopulation } from '~/hooks/api'
+import React, { useEffect } from 'react'
+import { usePrefPopulation } from '~/hooks/api'
+import { useSetPopulation } from '~/states/population'
 import { useTogglePrefCode } from '~/states/prefCodes'
 import { Prefecture } from '~/types'
 import { labelClass } from './PrefectureList.css'
@@ -12,9 +13,15 @@ export const Checkbox = React.memo(function Checkbox({
   pref,
   checked,
 }: CheckboxProps) {
+  const { data } = usePrefPopulation(pref.prefCode, checked)
+  const setPopulation = useSetPopulation()
   const toggle = useTogglePrefCode()
 
-  useFetchPopulation(pref, checked)
+  useEffect(() => {
+    if (data) {
+      setPopulation(pref, data)
+    }
+  }, [data, pref, setPopulation])
 
   return (
     <label className={labelClass}>

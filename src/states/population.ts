@@ -2,7 +2,7 @@ import { useCallback } from 'react'
 import { atom, useRecoilValue, useSetRecoilState } from 'recoil'
 import { Prefecture, YearValue } from '~/types'
 
-type Population = Record<
+type Population = Map<
   number,
   {
     prefCode: number
@@ -13,7 +13,7 @@ type Population = Record<
 
 const populationState = atom<Population>({
   key: 'population',
-  default: Object.create(null),
+  default: new Map(),
 })
 
 export const usePopulation = () => useRecoilValue(populationState)
@@ -23,14 +23,15 @@ export const useSetPopulation = () => {
 
   return useCallback(
     (pref: Prefecture, data: YearValue[]) => {
-      setState((currVal) => ({
-        ...currVal,
-        [pref.prefCode]: {
+      setState((currVal) => {
+        const newVal = {
           prefCode: pref.prefCode,
           prefName: pref.prefName,
           data,
-        },
-      }))
+        }
+
+        return new Map(currVal.set(pref.prefCode, newVal))
+      })
     },
     [setState]
   )

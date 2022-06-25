@@ -1,5 +1,5 @@
 import React from 'react'
-import { useFetchPopulation, usePrefectures } from '~/hooks/api'
+import { usePrefectures } from '~/hooks/api'
 import { usePrefCodes } from '~/states/prefCodes'
 import { Checkbox } from './Checkbox'
 import { liClass, ulClass } from './PrefectureList.css'
@@ -7,8 +7,6 @@ import { liClass, ulClass } from './PrefectureList.css'
 export const PrefectureList = React.memo(function PrefectureList() {
   const { isLoading, error, data } = usePrefectures()
   const prefCodes = usePrefCodes()
-
-  useFetchPopulation(prefCodes, data)
 
   if (isLoading) {
     return <p>Loading...</p>

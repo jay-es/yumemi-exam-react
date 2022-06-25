@@ -1,4 +1,5 @@
 import React from 'react'
+import { useFetchPopulation } from '~/hooks/api'
 import { useTogglePrefCode } from '~/states/prefCodes'
 import { Prefecture } from '~/types'
 import { labelClass } from './PrefectureList.css'
@@ -12,6 +13,8 @@ export const Checkbox = React.memo(function Checkbox({
   checked,
 }: CheckboxProps) {
   const toggle = useTogglePrefCode()
+
+  useFetchPopulation(pref, checked)
 
   return (
     <label className={labelClass}>

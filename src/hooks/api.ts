@@ -25,24 +25,15 @@ const fetchPopulation = (prefCode: number): Promise<YearValue[]> =>
     .then((res) => res.result.data[0].data)
 
 /** チェックボックスが変更されたら、その都道府県の人口を取得する */
-export const useFetchPopulation = (
-  prefCodes: number[],
-  prefectures: Prefecture[] | undefined
-) => {
+export const useFetchPopulation = (pref: Prefecture, checked: boolean) => {
   const population = usePopulation()
   const setPopulation = useSetPopulation()
 
   useEffect(() => {
-    prefCodes.forEach(async (prefCode) => {
-      if (population[prefCode] || !prefectures) return
+    if (!checked || population[pref.prefCode]) return
 
-      const pref = prefectures.find((p) => p.prefCode === prefCode)
-      if (!pref) {
-        throw new Error(`prefCode ${prefCode} not found`)
-      }
-
-      const data = await fetchPopulation(prefCode)
+    fetchPopulation(pref.prefCode).then((data) => {
       setPopulation(pref, data)
     })
-  }, [population, prefCodes, prefectures, setPopulation])
+  }, [checked, population, pref, setPopulation])
 }

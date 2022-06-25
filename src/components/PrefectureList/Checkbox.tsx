@@ -1,5 +1,5 @@
 import React from 'react'
-import { togglePrefCode } from '~/states/prefCodes'
+import { useTogglePrefCode } from '~/states/prefCodes'
 import { Prefecture } from '~/types'
 import { labelClass } from './PrefectureList.css'
 
@@ -11,7 +11,7 @@ export const Checkbox = React.memo(function Checkbox({
   pref,
   checked,
 }: CheckboxProps) {
-  const toggle = togglePrefCode()
+  const toggle = useTogglePrefCode()
 
   return (
     <label className={labelClass}>

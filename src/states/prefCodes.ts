@@ -8,7 +8,7 @@ const prefCodesState = atom<number[]>({
 
 export const usePrefCodes = () => useRecoilValue(prefCodesState)
 
-export const togglePrefCode = () => {
+export const useTogglePrefCode = () => {
   const setState = useSetRecoilState(prefCodesState)
 
   return useCallback((prefCode: number) => {

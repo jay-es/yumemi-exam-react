@@ -44,5 +44,5 @@ export const useFetchPopulation = (
       const data = await fetchPopulation(prefCode)
       setPopulation(pref, data)
     })
-  }, [prefCodes, prefectures])
+  }, [population, prefCodes, prefectures, setPopulation])
 }

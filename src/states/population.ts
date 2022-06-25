@@ -21,14 +21,17 @@ export const usePopulation = () => useRecoilValue(populationState)
 export const useSetPopulation = () => {
   const setState = useSetRecoilState(populationState)
 
-  return useCallback((pref: Prefecture, data: YearValue[]) => {
-    setState((currVal) => ({
-      ...currVal,
-      [pref.prefCode]: {
-        prefCode: pref.prefCode,
-        prefName: pref.prefName,
-        data,
-      },
-    }))
-  }, [])
+  return useCallback(
+    (pref: Prefecture, data: YearValue[]) => {
+      setState((currVal) => ({
+        ...currVal,
+        [pref.prefCode]: {
+          prefCode: pref.prefCode,
+          prefName: pref.prefName,
+          data,
+        },
+      }))
+    },
+    [setState]
+  )
 }

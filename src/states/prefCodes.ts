@@ -11,11 +11,14 @@ export const usePrefCodes = () => useRecoilValue(prefCodesState)
 export const useTogglePrefCode = () => {
   const setState = useSetRecoilState(prefCodesState)
 
-  return useCallback((prefCode: number) => {
-    setState((currVal) =>
-      currVal.includes(prefCode)
-        ? currVal.filter((v) => v !== prefCode)
-        : [...currVal, prefCode].sort((a, b) => a - b)
-    )
-  }, [])
+  return useCallback(
+    (prefCode: number) => {
+      setState((currVal) =>
+        currVal.includes(prefCode)
+          ? currVal.filter((v) => v !== prefCode)
+          : [...currVal, prefCode].sort((a, b) => a - b)
+      )
+    },
+    [setState]
+  )
 }

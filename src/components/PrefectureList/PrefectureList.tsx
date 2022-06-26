@@ -1,7 +1,7 @@
 import React from 'react'
 import { usePrefectures } from '~/hooks/api'
 import { usePrefCodes } from '~/states/prefCodes'
-import { Checkbox } from './Checkbox'
+import { PrefectureListItem } from './PrefectureListItem'
 import { liClass, ulClass } from './PrefectureList.css'
 
 export const PrefectureList = React.memo(function PrefectureList() {
@@ -20,7 +20,10 @@ export const PrefectureList = React.memo(function PrefectureList() {
     <ul className={ulClass}>
       {data?.map((pref) => (
         <li key={pref.prefCode} className={liClass}>
-          <Checkbox pref={pref} checked={prefCodes.includes(pref.prefCode)} />
+          <PrefectureListItem
+            pref={pref}
+            checked={prefCodes.includes(pref.prefCode)}
+          />
         </li>
       ))}
 

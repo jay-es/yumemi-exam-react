@@ -3,7 +3,7 @@ import { usePrefPopulation } from '~/hooks/api'
 import { useSetPopulation } from '~/states/population'
 import { useTogglePrefCode } from '~/states/prefCodes'
 import { Prefecture } from '~/types'
-import { Checkbox } from './Checkbox'
+import { labelClass } from './PrefectureList.css'
 
 type Props = {
   pref: Prefecture
@@ -26,8 +26,9 @@ export const PrefectureListItem = React.memo(function PrefectureListItem({
   }, [data, pref, setPopulation])
 
   return (
-    <Checkbox checked={checked} onChange={handleChange}>
+    <label className={labelClass}>
+      <input type="checkbox" checked={checked} onChange={handleChange} />
       {pref.prefName}
-    </Checkbox>
+    </label>
   )
 })

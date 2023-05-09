@@ -19,17 +19,9 @@ export const usePrefectures = () =>
   })
 
 /** 人口構成 API から「総人口」部分のデータを取得 */
-export const usePrefPopulation = (prefCode: number, enabled: boolean) =>
-  useQuery<YearValue[]>(
-    ['population', prefCode],
-    () =>
-      fetch(`${API_ROOT}/population/composition/perYear?prefCode=${prefCode}`, {
-        headers,
-      })
-        .then((res) => res.json())
-        .then((res) => res.result.data[0].data),
-    {
-      enabled,
-      staleTime: Infinity,
-    }
-  )
+export const fetchPrefPopulation = (prefCode: number): Promise<YearValue[]> =>
+  fetch(`${API_ROOT}/population/composition/perYear?prefCode=${prefCode}`, {
+    headers,
+  })
+    .then((res) => res.json())
+    .then((res) => res.result.data[0].data)

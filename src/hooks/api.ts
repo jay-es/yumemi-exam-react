@@ -1,4 +1,3 @@
-import { useQuery } from 'react-query'
 import { Prefecture, YearValue } from '~/types'
 
 const API_ROOT = 'https://opendata.resas-portal.go.jp/api/v1'
@@ -8,15 +7,10 @@ const headers = {
 }
 
 /** 都道府県データを取得 */
-const fetchPrefectures = (): Promise<Prefecture[]> =>
+export const fetchPrefectures = (): Promise<Prefecture[]> =>
   fetch(`${API_ROOT}/prefectures`, { headers })
     .then((res) => res.json())
     .then((res) => res.result)
-
-export const usePrefectures = () =>
-  useQuery<Prefecture[], Error>('prefectures', fetchPrefectures, {
-    staleTime: Infinity,
-  })
 
 /** 人口構成 API から「総人口」部分のデータを取得 */
 export const fetchPrefPopulation = (prefCode: number): Promise<YearValue[]> =>

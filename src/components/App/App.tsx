@@ -8,7 +8,9 @@ export const App = React.memo(function App() {
     <div>
       <header className={headerClass}>都道府県別 総人口推移</header>
       <main className={mainClass}>
-        <PrefectureList />
+        <React.Suspense fallback={<div>Loading...</div>}>
+          <PrefectureList />
+        </React.Suspense>
         <React.Suspense fallback={<div>Loading...</div>}>
           <Graph />
         </React.Suspense>

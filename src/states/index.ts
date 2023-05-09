@@ -1,21 +1,20 @@
 import {
-  atom,
   atomFamily,
   selector,
   selectorFamily,
   useRecoilState,
   useRecoilValue,
-  useSetRecoilState,
 } from 'recoil'
-import { fetchPrefPopulation } from '~/hooks/api'
+import { fetchPrefPopulation, fetchPrefectures } from '~/hooks/api'
 import type { Prefecture } from '~/types'
 
 // 都道府県データ
-export const prefecturesState = atom<Prefecture[]>({
+export const prefecturesState = selector<Prefecture[]>({
   key: 'prefectures',
+  get: fetchPrefectures,
 })
 
-export const useSetPrefectures = () => useSetRecoilState(prefecturesState)
+export const usePrefectures = () => useRecoilValue(prefecturesState)
 
 // 都道府県ごとのチェック状態
 const checkedStateFamily = atomFamily({

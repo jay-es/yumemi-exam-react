@@ -7,7 +7,7 @@ import {
   useRecoilValueLoadable,
   waitForAll,
 } from 'recoil'
-import { fetchPrefPopulation, fetchPrefectures } from '~/hooks/api'
+import { fetchPrefPopulation, fetchPrefectures } from './api'
 import type { GraphData, Prefecture } from '~/types'
 
 // 都道府県データ

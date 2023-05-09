@@ -8,9 +8,10 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js'
-import React from 'react'
+import React, { useRef } from 'react'
 import { Line } from 'react-chartjs-2'
 import { useGraphData } from '~/states'
+import { GraphData } from '~/types'
 
 ChartJS.register(
   CategoryScale,
@@ -24,6 +25,12 @@ ChartJS.register(
 
 export const Graph = React.memo(function Graph() {
   const graphData = useGraphData()
+  const data = useRef<GraphData | null>(null)
 
-  return <Line data={graphData} />
+  // // 成功時のデータを保持
+  if (graphData.state === 'hasValue') {
+    data.current = graphData.contents
+  }
+
+  return data.current && <Line data={data.current} />
 })

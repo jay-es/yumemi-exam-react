@@ -4,9 +4,11 @@ import {
   selectorFamily,
   useRecoilState,
   useRecoilValue,
+  useRecoilValueLoadable,
+  waitForAll,
 } from 'recoil'
 import { fetchPrefPopulation, fetchPrefectures } from '~/hooks/api'
-import type { Prefecture } from '~/types'
+import type { GraphData, Prefecture } from '~/types'
 
 // 都道府県データ
 export const prefecturesState = selector<Prefecture[]>({
@@ -34,18 +36,16 @@ const populationStateFamily = selectorFamily({
 // グラフ用データ
 const graphDataState = selector({
   key: 'graphData',
-  get: async ({ get }) => {
+  get: async ({ get }): Promise<GraphData> => {
     const prefectures = get(prefecturesState)
     const checkedPrefectures = prefectures.filter((pref) =>
       get(checkedStateFamily(pref.prefCode))
     )
-    const populations = (
-      await Promise.all(
-        checkedPrefectures.map((pref) =>
-          get(populationStateFamily(pref.prefCode))
-        )
+    const populations = get(
+      waitForAll(
+        checkedPrefectures.map((pref) => populationStateFamily(pref.prefCode))
       )
-    ).filter((v): v is NonNullable<typeof v> => !!v)
+    )
 
     // 360 度を 2 周
     const PREF_RATIO = (360 / 47) * 2
@@ -53,7 +53,7 @@ const graphDataState = selector({
     const labels = populations[0]?.map((p) => p.year)
     const datasets = checkedPrefectures.map((p, i) => ({
       label: p.prefName,
-      data: populations[i]?.map((v) => v.value),
+      data: populations[i]?.map((v) => v.value) ?? [],
       borderColor: `hsl(${p.prefCode * PREF_RATIO}, 75%, 50%)`,
       backgroundColor: `hsl(${p.prefCode * PREF_RATIO}, 100%, 90%)`,
     }))
@@ -62,4 +62,4 @@ const graphDataState = selector({
   },
 })
 
-export const useGraphData = () => useRecoilValue(graphDataState)
+export const useGraphData = () => useRecoilValueLoadable(graphDataState)

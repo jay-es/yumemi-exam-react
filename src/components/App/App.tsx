@@ -11,9 +11,7 @@ export const App = React.memo(function App() {
         <React.Suspense fallback={<div>Loading...</div>}>
           <PrefectureList />
         </React.Suspense>
-        <React.Suspense fallback={<div>Loading...</div>}>
-          <Graph />
-        </React.Suspense>
+        <Graph />
       </main>
     </div>
   )

@@ -1,4 +1,4 @@
-import { ChartData } from 'chart.js'
+import type { ChartData } from 'chart.js'
 
 export type Prefecture = {
   prefCode: number

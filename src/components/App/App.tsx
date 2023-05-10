@@ -1,7 +1,9 @@
 import React from 'react'
-import { headerClass, mainClass } from './App.css'
+
 import { Graph } from '~/components/Graph/Graph'
 import { PrefectureList } from '~/components/PrefectureList'
+
+import { headerClass, mainClass } from './App.css'
 
 export const App = React.memo(function App() {
   return (

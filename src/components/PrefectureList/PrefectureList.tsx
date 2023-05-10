@@ -1,7 +1,9 @@
 import React from 'react'
+
 import { usePrefectures } from '~/states'
-import { PrefectureListItem } from './PrefectureListItem'
+
 import { liClass, ulClass } from './PrefectureList.css'
+import { PrefectureListItem } from './PrefectureListItem'
 
 export const PrefectureList = React.memo(function PrefectureList() {
   const prefectures = usePrefectures()

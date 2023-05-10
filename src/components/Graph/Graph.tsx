@@ -1,17 +1,18 @@
 import {
-  Chart as ChartJS,
   CategoryScale,
+  Chart as ChartJS,
+  Legend,
   LinearScale,
-  PointElement,
   LineElement,
+  PointElement,
   Title,
   Tooltip,
-  Legend,
 } from 'chart.js'
 import React, { useRef } from 'react'
 import { Line } from 'react-chartjs-2'
+
 import { useGraphData } from '~/states'
-import { GraphData } from '~/types'
+import type { GraphData } from '~/types'
 
 ChartJS.register(
   CategoryScale,

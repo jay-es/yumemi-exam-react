@@ -7,8 +7,10 @@ import {
   useRecoilValueLoadable,
   waitForAll,
 } from 'recoil'
-import { fetchPrefPopulation, fetchPrefectures } from './api'
+
 import type { GraphData, Prefecture } from '~/types'
+
+import { fetchPrefectures, fetchPrefPopulation } from './api'
 
 // 都道府県データ
 export const prefecturesState = selector<Prefecture[]>({

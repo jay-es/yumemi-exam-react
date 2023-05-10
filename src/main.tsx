@@ -1,8 +1,10 @@
+import './index.css'
+
 import React from 'react'
 import ReactDOM from 'react-dom/client'
 import { RecoilRoot } from 'recoil'
+
 import { App } from './components/App'
-import './index.css'
 
 /* eslint-disable react-memo/require-usememo */
 // eslint-disable-next-line @typescript-eslint/no-non-null-assertion

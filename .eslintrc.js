@@ -18,9 +18,17 @@ module.exports = {
     ecmaVersion: 'latest',
     sourceType: 'module',
   },
-  plugins: ['react', 'react-memo', '@typescript-eslint'],
+  plugins: ['react', 'react-memo', 'simple-import-sort', '@typescript-eslint'],
   rules: {
     'react-memo/require-memo': 'error',
     'react-memo/require-usememo': 'error',
+    'simple-import-sort/imports': 'error',
+    'simple-import-sort/exports': 'error',
+    '@typescript-eslint/consistent-type-imports': 'error',
+  },
+  settings: {
+    react: {
+      version: 'detect',
+    },
   },
 }

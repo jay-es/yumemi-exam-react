@@ -1,7 +1,9 @@
 import React from 'react'
-import { Prefecture } from '~/types'
-import { labelClass } from './PrefectureList.css'
+
 import { useChecked } from '~/states'
+import type { Prefecture } from '~/types'
+
+import { labelClass } from './PrefectureList.css'
 
 type Props = {
   pref: Prefecture

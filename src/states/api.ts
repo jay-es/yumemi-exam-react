@@ -1,4 +1,4 @@
-import { Prefecture, YearValue } from '~/types'
+import type { Prefecture, YearValue } from '~/types'
 
 const API_ROOT = 'https://opendata.resas-portal.go.jp/api/v1'
 

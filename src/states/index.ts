@@ -1,4 +1,5 @@
 import {
+  atom,
   atomFamily,
   selector,
   selectorFamily,
@@ -8,9 +9,16 @@ import {
   waitForAll,
 } from 'recoil'
 
-import type { GraphData, Prefecture } from '~/types'
+import type { AgeGroup, GraphData, Prefecture } from '~/types'
 
 import { fetchPrefectures, fetchPrefPopulation } from './api'
+
+// データ種別
+const ageGroupState = atom<AgeGroup>({
+  key: 'ageGroup',
+  default: '総人口',
+})
+export const useAgeGroup = () => useRecoilState(ageGroupState)
 
 // 都道府県データ
 export const prefecturesState = selector<Prefecture[]>({
@@ -43,10 +51,14 @@ const graphDataState = selector({
     const checkedPrefectures = prefectures.filter((pref) =>
       get(checkedStateFamily(pref.prefCode))
     )
-    const populations = get(
+    const responses = get(
       waitForAll(
         checkedPrefectures.map((pref) => populationStateFamily(pref.prefCode))
       )
+    )
+    const ageGroup = get(ageGroupState)
+    const populations = responses.map(
+      (res) => res.find((v) => v.label === ageGroup)?.data
     )
 
     // 360 度を 2 周

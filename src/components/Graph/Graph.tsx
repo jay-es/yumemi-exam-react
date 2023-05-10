@@ -8,11 +8,10 @@ import {
   Tooltip,
   Legend,
 } from 'chart.js'
-import React, { useMemo } from 'react'
+import React, { useRef } from 'react'
 import { Line } from 'react-chartjs-2'
-
-import { usePopulation } from '~/states/population'
-import { usePrefCodes } from '~/states/prefCodes'
+import { useGraphData } from '~/states'
+import { GraphData } from '~/types'
 
 ChartJS.register(
   CategoryScale,
@@ -24,27 +23,14 @@ ChartJS.register(
   Legend
 )
 
-// 360 度を 2 周
-const PREF_RATIO = (360 / 47) * 2
-
 export const Graph = React.memo(function Graph() {
-  const prefCodes = usePrefCodes()
-  const population = usePopulation()
+  const graphData = useGraphData()
+  const data = useRef<GraphData | null>(null)
 
-  const data = useMemo(() => {
-    const values = [...population.values()]
-    const labels = values[0]?.data.map((p) => p.year)
-    const datasets = values
-      .filter(({ prefCode }) => prefCodes.includes(prefCode))
-      .map((p) => ({
-        label: p.prefName,
-        data: p.data.map((d) => d.value),
-        borderColor: `hsl(${p.prefCode * PREF_RATIO}, 75%, 50%)`,
-        backgroundColor: `hsl(${p.prefCode * PREF_RATIO}, 100%, 90%)`,
-      }))
+  // // 成功時のデータを保持
+  if (graphData.state === 'hasValue') {
+    data.current = graphData.contents
+  }
 
-    return { labels, datasets }
-  }, [prefCodes, population])
-
-  return <Line data={data} />
+  return data.current && <Line data={data.current} />
 })

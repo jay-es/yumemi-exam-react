@@ -1,33 +1,22 @@
-import React, { useCallback, useEffect } from 'react'
-import { usePrefPopulation } from '~/hooks/api'
-import { useSetPopulation } from '~/states/population'
-import { useTogglePrefCode } from '~/states/prefCodes'
+import React from 'react'
 import { Prefecture } from '~/types'
-import { Checkbox } from './Checkbox'
+import { labelClass } from './PrefectureList.css'
+import { useChecked } from '~/states'
 
 type Props = {
   pref: Prefecture
-  checked: boolean
 }
 
 export const PrefectureListItem = React.memo(function PrefectureListItem({
   pref,
-  checked,
 }: Props) {
-  const { data } = usePrefPopulation(pref.prefCode, checked)
-  const setPopulation = useSetPopulation()
-  const toggle = useTogglePrefCode()
-  const handleChange = useCallback(() => toggle(pref.prefCode), [pref, toggle])
-
-  useEffect(() => {
-    if (data) {
-      setPopulation(pref, data)
-    }
-  }, [data, pref, setPopulation])
+  const [checked, setChecked] = useChecked(pref.prefCode)
+  const handleChange = () => setChecked((prev) => !prev)
 
   return (
-    <Checkbox checked={checked} onChange={handleChange}>
+    <label className={labelClass}>
+      <input type="checkbox" checked={checked} onChange={handleChange} />
       {pref.prefName}
-    </Checkbox>
+    </label>
   )
 })

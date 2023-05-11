@@ -26,6 +26,14 @@ module.exports = {
     'simple-import-sort/exports': 'error',
     '@typescript-eslint/consistent-type-imports': 'error',
   },
+  overrides: [
+    {
+      files: '*.spec.tsx',
+      rules: {
+        'react/react-in-jsx-scope': 'off',
+      },
+    },
+  ],
   settings: {
     react: {
       version: 'detect',

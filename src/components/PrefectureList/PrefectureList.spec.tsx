@@ -1,6 +1,6 @@
 import 'cross-fetch/polyfill'
 
-import { render, waitFor } from '@testing-library/react'
+import { render, screen } from '@testing-library/react'
 import { rest } from 'msw'
 import { setupServer } from 'msw/node'
 import React from 'react'
@@ -23,7 +23,7 @@ describe('PrefectureList', async () => {
   afterAll(() => server.close())
 
   it('リストが表示される', async () => {
-    const renderResult = render(
+    render(
       <RecoilRoot>
         <React.Suspense>
           <PrefectureList />
@@ -31,9 +31,7 @@ describe('PrefectureList', async () => {
       </RecoilRoot>
     )
 
-    await waitFor(() => {
-      expect(renderResult.getByRole('list')).toBeInTheDocument()
-      expect(renderResult.queryAllByRole('listitem')).toHaveLength(47 * 2)
-    })
+    expect(await screen.findByRole('list')).toBeInTheDocument()
+    expect(screen.queryAllByRole('listitem')).toHaveLength(47 * 2)
   })
 })

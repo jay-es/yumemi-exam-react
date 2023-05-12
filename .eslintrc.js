@@ -31,6 +31,7 @@ module.exports = {
       files: '*.spec.tsx',
       rules: {
         'react/react-in-jsx-scope': 'off',
+        'react-memo/require-usememo': 'off',
       },
     },
   ],

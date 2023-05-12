@@ -29,7 +29,7 @@ module.exports = {
   overrides: [
     {
       files: '*.spec.tsx',
-      extends: ['plugin:testing-library/react'],
+      extends: ['plugin:jest-dom/recommended', 'plugin:testing-library/react'],
       rules: {
         'react/react-in-jsx-scope': 'off',
         'react-memo/require-usememo': 'off',

@@ -3,7 +3,7 @@ name: CI
 on: push
 
 jobs:
-  test:
+  CI:
     runs-on: ubuntu-latest
     steps:
       - uses: actions/checkout@v3
@@ -21,8 +21,8 @@ jobs:
         if: steps.node_modules_cache.outputs.cache-hit != 'true'
         run: npm ci
       - name: lint
-        run: npx eslint --cache src
+        run: npx eslint .
       - name: format
-        run: npx prettier --check src
+        run: npx prettier --check --ignore-unknown .
       - name: test
         run: npx vitest related --run

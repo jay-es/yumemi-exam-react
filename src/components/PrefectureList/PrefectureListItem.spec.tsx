@@ -13,7 +13,7 @@ describe('PrefectureListItem', () => {
       </RecoilRoot>
     )
 
-    expect(screen.getByText('北海道')).toBeInTheDocument()
+    expect(screen.getByRole('checkbox', { name: '北海道' })).toBeInTheDocument()
   })
 
   it('最初はチェックが入っていない。クリックでチェックされる', async () => {

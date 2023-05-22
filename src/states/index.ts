@@ -21,7 +21,7 @@ const ageGroupState = atom<AgeGroup>({
 export const useAgeGroup = () => useRecoilState(ageGroupState)
 
 // 都道府県データ
-export const prefecturesState = selector<Prefecture[]>({
+const prefecturesState = selector<Prefecture[]>({
   key: 'prefectures',
   get: fetchPrefectures,
 })

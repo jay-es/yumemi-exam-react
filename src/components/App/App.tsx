@@ -1,6 +1,6 @@
 import React from 'react'
 
-import { Graph } from '~/components/Graph/Graph'
+import { Graph } from '~/components/Graph'
 import { PrefectureList } from '~/components/PrefectureList'
 
 import { AgeGroupSelector } from '../AgeGroupSelector'

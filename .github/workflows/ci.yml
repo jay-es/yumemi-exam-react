@@ -20,6 +20,8 @@ jobs:
       - name: Install dependencies
         if: steps.node_modules_cache.outputs.cache-hit != 'true'
         run: npm ci
+      - name: type check
+        run: npx tsc --noEmit
       - name: lint
         run: npx eslint .
       - name: format

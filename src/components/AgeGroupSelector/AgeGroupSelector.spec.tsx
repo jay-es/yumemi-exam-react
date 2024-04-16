@@ -1,17 +1,13 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { RecoilRoot } from 'recoil'
+import { Provider } from 'jotai'
 import { describe, expect, it } from 'vitest'
 
 import { AgeGroupSelector } from './AgeGroupSelector'
 
 describe('AgeGroupSelector', () => {
   it('初期値は「総人口」', () => {
-    render(
-      <RecoilRoot>
-        <AgeGroupSelector />
-      </RecoilRoot>
-    )
+    render(<AgeGroupSelector />)
 
     const select = screen.getByRole('combobox')
     expect(select).toBeInTheDocument()
@@ -19,11 +15,7 @@ describe('AgeGroupSelector', () => {
   })
 
   it('「年少人口」に変更', async () => {
-    render(
-      <RecoilRoot>
-        <AgeGroupSelector />
-      </RecoilRoot>
-    )
+    render(<AgeGroupSelector />)
 
     const select = screen.getByRole('combobox')
     const user = userEvent.setup()
@@ -35,9 +27,9 @@ describe('AgeGroupSelector', () => {
 
   it('選択肢にない値には変更できない', () => {
     render(
-      <RecoilRoot>
+      <Provider>
         <AgeGroupSelector />
-      </RecoilRoot>
+      </Provider>
     )
 
     const select = screen.getByRole('combobox')

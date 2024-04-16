@@ -29,8 +29,8 @@ export const Graph = React.memo(function Graph() {
   const data = useRef<GraphData | null>(null)
 
   // // 成功時のデータを保持
-  if (graphData.state === 'hasValue') {
-    data.current = graphData.contents
+  if (graphData.state === 'hasData') {
+    data.current = graphData.data
   }
 
   return data.current && <Line data={data.current} />

@@ -4,7 +4,6 @@ import { render, screen } from '@testing-library/react'
 import { rest } from 'msw'
 import { setupServer } from 'msw/node'
 import React from 'react'
-import { RecoilRoot } from 'recoil'
 import { afterAll, afterEach, beforeAll, describe, expect, it } from 'vitest'
 
 import { PrefectureList } from './PrefectureList'
@@ -24,11 +23,9 @@ describe('PrefectureList', async () => {
 
   it('リストが表示される', async () => {
     render(
-      <RecoilRoot>
-        <React.Suspense>
-          <PrefectureList />
-        </React.Suspense>
-      </RecoilRoot>
+      <React.Suspense>
+        <PrefectureList />
+      </React.Suspense>
     )
 
     expect(await screen.findByRole('list')).toBeInTheDocument()

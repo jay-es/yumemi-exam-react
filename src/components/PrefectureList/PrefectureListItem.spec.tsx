@@ -1,27 +1,18 @@
 import { render, screen } from '@testing-library/react'
 import userEvent from '@testing-library/user-event'
-import { RecoilRoot } from 'recoil'
 import { describe, expect, it } from 'vitest'
 
 import { PrefectureListItem } from './PrefectureListItem'
 
 describe('PrefectureListItem', () => {
   it('都道府県名が表示される', () => {
-    render(
-      <RecoilRoot>
-        <PrefectureListItem pref={{ prefCode: 1, prefName: '北海道' }} />
-      </RecoilRoot>
-    )
+    render(<PrefectureListItem pref={{ prefCode: 1, prefName: '北海道' }} />)
 
     expect(screen.getByRole('checkbox', { name: '北海道' })).toBeInTheDocument()
   })
 
   it('最初はチェックが入っていない。クリックでチェックされる', async () => {
-    render(
-      <RecoilRoot>
-        <PrefectureListItem pref={{ prefCode: 1, prefName: '北海道' }} />
-      </RecoilRoot>
-    )
+    render(<PrefectureListItem pref={{ prefCode: 1, prefName: '北海道' }} />)
 
     const checkbox = screen.getByRole('checkbox')
 
